@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "/home/surya/projects/flask_works/online-exam"
+		}
+	],
+	"settings": {
+		"python.pythonPath": "${workspaceFolder}/env/bin/python3.6"
+	}
+}
