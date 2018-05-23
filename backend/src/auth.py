@@ -5,9 +5,9 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-AUTH0_DOMAIN = 'your domain url'
-ALGORITHMS = ['RSA256']
-API_AUDIENCE = 'your audience url'
+AUTH0_DOMAIN = 'your api key'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'localhost:5000'
 
 
 class AuthError(Exception):
@@ -93,7 +93,7 @@ def requires_auth(f):
                 }, 401)
             except Exception:
                 raise AuthError({
-                    'code', 'invalid_header',
+                    'code': 'invalid_header',
                     'description': 'Unable to parse authentication token.'
                 }, 400)
 
@@ -107,9 +107,3 @@ def requires_auth(f):
         }, 400)
 
     return decorated
-
-                
-
-
-
-
