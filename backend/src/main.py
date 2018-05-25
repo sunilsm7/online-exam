@@ -32,7 +32,7 @@ def get_exams():
 @requires_auth
 def add_exam():
     # mount exam object
-    posted_exam = ExamSchema(only=('title', 'description')).load(request.get_json())
+    posted_exam = ExamSchema(only=('title', 'description', 'long_description')).load(request.get_json())
 
     exam = Exam(**posted_exam.data, created_by="HTTP post request")
     
@@ -48,7 +48,7 @@ def add_exam():
     
     
 @app.route('/exams/<examId>', methods=['DELETE'])
-@require_role('admin')
+@requires_role('admin')
 def delete_exam(examId):
     session = Session()
     exam = session.query(Exam).filter_by(id=examId).first()
