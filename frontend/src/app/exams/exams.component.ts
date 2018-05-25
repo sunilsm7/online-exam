@@ -8,10 +8,7 @@ import {ExamsApiService} from './exams-api.service';
   selector: 'exams',
   template: `
     <div>
-      <button routerLink="/new-exam">New Exam</button>
-      <button (click)="signIn()" *ngIf="!authenticated">Sign In</button>
-      <button (click)="signOut()" *ngIf="authenticated">Sign Out</button>
-      <p *ngIf="authenticated">Hello {{getProfile().name}}</p>
+      <button routerLink="/new-exam">New Exam</button>      
       <ul>
         <li *ngFor="let exam of examsList">
           {{exam.title}}
@@ -25,12 +22,7 @@ export class ExamsComponent implements OnInit, OnDestroy {
   examsList: Exam[];
   authenticated = false;
 
-  constructor(private examsApi: ExamsApiService) {
-  }
-
-  signIn = Auth0.signIn;
-  signOut = Auth0.signOut;
-  getProfile = Auth0.getProfile;
+  constructor(private examsApi: ExamsApiService) { }
 
   ngOnInit() {
     this.examsListSubs = this.examsApi
@@ -41,8 +33,7 @@ export class ExamsComponent implements OnInit, OnDestroy {
         console.error
       );
       const self = this;
-      Auth0.subscribe((authenticated) => (
-        self.authenticated = authenticated));
+      Auth0.subscribe((authenticated) => (self.authenticated = authenticated));
   }
 
   ngOnDestroy() {
